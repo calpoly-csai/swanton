@@ -15,6 +15,8 @@ sudo apt update \
     && git clone https://github.com/calpoly-csai/swanton \
     && cd swanton \
     && ./debian_setup.sh
+    
+source $HOME/.poetry/env
 ```
 
 ### On a [Google Voice Kit Raspbian][voice_kit_raspbian] image
