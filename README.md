@@ -4,8 +4,12 @@ Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi
 ## Getting Started
 
 ### On a fresh Debian/Raspbian image
+`# TODO: do not chmod 777`
+
 ```
-sudo apt update \
+cd / && sudo mkdir app \
+    && sudo chmod 777 app \
+    && sudo apt update \
     && sudo apt install -y git \
     && git clone https://github.com/calpoly-csai/swanton \
     && cd swanton \
