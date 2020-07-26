@@ -1,5 +1,5 @@
 # swanton
-Swanton Pacific Ranch chatbot with a knowledge graph
+Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi
 
 
 ## Getting Started
