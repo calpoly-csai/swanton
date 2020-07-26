@@ -36,6 +36,23 @@ sudo apt update \
 sudo reboot
 
 sudo ./debian_setup.sh
+
+source $HOME/.poetry/env
+```
+
+
+## Verify Versions
+
+# python3 >= 3.6
+```
+$ python3 --version
+Python 3.7.3
+```
+
+# pip3 >= 20 using python >= 3.6
+```
+$ pip3 --version
+pip 20.1.1 from /usr/local/lib/python3.7/dist-packages/pip (python 3.7)
 ```
 
 
