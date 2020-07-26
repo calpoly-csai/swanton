@@ -1,2 +1,2 @@
-# swanson
-Swanson Pacific Ranch chatbot with a knowledge graph
+# swanton
+Swanton Pacific Ranch chatbot with a knowledge graph
