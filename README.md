@@ -31,7 +31,8 @@ sudo apt update \
     && sudo apt install -y git \
     && git clone https://github.com/calpoly-csai/swanton \
     && cd swanton \
-    && ./voice_kit_raspbian_setup.sh
+    && ./voice_kit_raspbian_setup.sh \
+    && ./debian_setup.sh
 ```
 
 
