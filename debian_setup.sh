@@ -17,6 +17,11 @@ set -Eeuo pipefail
 
 source /etc/os-release
 
+echo "YOUR SYSTEM INFORMATION..."
+cat /etc/os-release
+echo "..."
+echo "..."
+
 echo "Installing pip & python"
 
 sudo apt-get update -y
