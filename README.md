@@ -12,7 +12,7 @@ sudo apt update \
     && ./debian_setup.sh
 ```
 
-### [Google Voice Kit Raspbian][voice_kit_raspbian] image
+### On a [Google Voice Kit Raspbian][voice_kit_raspbian] image
 
 <details>
 
