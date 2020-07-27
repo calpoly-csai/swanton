@@ -38,35 +38,6 @@ sudo apt update \
 source $HOME/.poetry/env
 ```
 
-### On a [Google Voice Kit Raspbian][voice_kit_raspbian] image
-
-<details>
-
-So, uh..
-
-[it's a bit complicated](https://github.com/google/aiyprojects-raspbian/issues/527)
-
-[quite a bit complicated](https://github.com/google/aiyprojects-raspbian/issues/608)
-
-but the commands below should make life easy 😎
-
-</details>
-
-```
-sudo apt update \
-    && sudo apt install -y git \
-    && git clone https://github.com/calpoly-csai/swanton \
-    && cd swanton \
-    && ./voice_kit_raspbian_setup.sh \
-
-sudo reboot
-
-sudo ./debian_setup.sh
-
-source $HOME/.poetry/env
-```
-
-
 ## Verify Versions
 
 ### python3 >= 3.6
