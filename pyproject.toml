@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "swanton"
+version = "0.1.0"
+description = "Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi"
+authors = ["CalPoly CSAI Team"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pip = "^20.0.0"
+rasa = "^1.10.8"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+flake8 = "^3.8.3"
+
+[build-system]
+requires = ["poetry>=1.0.3", "pip>=20.0.0"]
+build-backend = "poetry.masonry.api"
