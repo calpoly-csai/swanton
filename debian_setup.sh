@@ -39,16 +39,3 @@ sudo pip3 install --upgrade pip || : #
 
 echo "now get poetry https://python-poetry.org"
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
-
-
-#
-# misc
-#
-
-
-echo "now some nice to haves zsh && oh-my-zsh"
-echo "https://ohmyz.sh"
-echo
-sudo apt install -y zsh
-yes | sudo sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
