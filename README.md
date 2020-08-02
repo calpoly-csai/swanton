@@ -23,12 +23,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 
 </details> 
 
-`# TODO: do not chmod 777`
-
 ```
-
-sudo mkdir /app && sudo chmod 777 /app && cd /app
-
 sudo apt update \
     && sudo apt install -y git \
     && git clone https://github.com/calpoly-csai/swanton \
