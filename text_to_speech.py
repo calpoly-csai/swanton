@@ -32,11 +32,13 @@ def tts_options(text: str, rate: int, voice: int, volume: float) -> int:
         engine.say(text)
         engine.runAndWait()
         return 0
-    except ImportError:
+    except ImportError as e:
         print("Requested driver not found")
+        print(e)
         return 1
-    except RuntimeError:
+    except RuntimeError as e:
         print("Driver failed to initialize")
+        print(e)
         return 1
 
 
