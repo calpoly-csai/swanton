@@ -49,7 +49,8 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 
 echo "setup docker repository"
 
-sudo apt-get remove docker docker-engine docker.io containerd runc
+# remove if already installed, else do nothing
+sudo apt-get remove docker docker-engine docker.io containerd runc || : 
 
 sudo apt-get install -y \
     apt-transport-https \
