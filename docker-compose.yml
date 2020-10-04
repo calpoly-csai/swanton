@@ -1,7 +1,7 @@
-version: "3.8"
+version: "3.3"
 services:
   rasa:
-    image: "rasa/rasa:latest"
+    image: "${repo}/rasa:1.10.14"
     expose:
       - 5005
     ports:
