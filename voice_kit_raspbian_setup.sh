@@ -1,7 +1,10 @@
-#Add AIY package repo:
+echo "apt update stuff"
 
-echo "deb https://packages.cloud.google.com/apt aiyprojects-stable main" | sudo tee /etc/apt/sources.list.d/aiyprojects.list
 
-#Add Google package keys:
+echo "install python & pip"
 
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+echo "install docker"
+
+
+echo "install rasa"

@@ -5,24 +5,6 @@ Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi
 
 ### Step 1 - Setup a fresh Debian 10 or Raspbian image
 
-<details> 
-    
-```
-$ cat /etc/os-release
-
-PRETTY_NAME="Debian GNU/Linux 9 (stretch)"
-NAME="Debian GNU/Linux"
-VERSION_ID="9"
-VERSION="9 (stretch)"
-VERSION_CODENAME=stretch
-ID=debian
-HOME_URL="https://www.debian.org/"
-SUPPORT_URL="https://www.debian.org/support"
-BUG_REPORT_URL="https://bugs.debian.org/"
-```
-
-</details> 
-
 ```
 sudo apt update \
     && sudo apt install -y git \
