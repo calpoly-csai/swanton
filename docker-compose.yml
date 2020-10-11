@@ -7,6 +7,6 @@ services:
     ports:
       - 5005:5005
     volumes:
-      - ./:/app
+      - ./rasa:/app
     command:
       - run
