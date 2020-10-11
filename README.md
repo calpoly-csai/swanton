@@ -1,9 +1,9 @@
 # swanton
-Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi
-
+Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi. 
 ## Getting Started
 
 ### Step 1 - Setup a fresh Debian 10 or Raspbian image
+On a raspberry pi, we recommend using the AIY voicekit image from [here](https://github.com/google/aiyprojects-raspbian/releases) for your sd card.
 
 ```
 sudo apt update \
