@@ -1,3 +1,4 @@
+import argparse
 import csv
 import json
 import numpy as np
@@ -11,7 +12,12 @@ from google.cloud import texttospeech
 
 class Audio_Data_Gen:
     
-    def __init__(self, credentials="auth.json"):
+    def __init__(self, credentials:str="auth.json", 
+                 accent:str="US", 
+                 speaker:str="D") -> None:
+
+        self.accent = accent
+        self.speaker = speaker
 
         data_dir_name = "response_data"
 
@@ -32,12 +38,13 @@ class Audio_Data_Gen:
         if (not(os.path.isdir(self.data_dir_path))):
             os.makedirs(self.data_dir_path)
 
-    def read_csv(self, csv_path: str) -> dict:
+    def read_csv(self, csv_path: str) -> set:
         '''
         Reads the CSV row-by-row and stores the answers as a set. 
         An example is as follows:
 
         answers_set = {
+            "Sorry, I do not know the answer to your question.",
             "The ranch is 3200 acres.",
             "Fred Swanton"
         }
@@ -46,7 +53,9 @@ class Audio_Data_Gen:
         :returns answers_set: Answer string within the set
         '''
 
-        answers_set = set()
+        answers_set = {
+            "Sorry, I do not know the answer to your question."
+        }
 
         # Open the CSV
         with open(csv_path, 'r') as csv_file:
@@ -69,7 +78,7 @@ class Audio_Data_Gen:
 
         return answers_set
 
-    def Text_To_Speech(self, csv_path):
+    def Text_To_Speech(self, csv_path:str) -> None:
         '''
         Iterates through the set of answer strings and generates audio of the 
         string which is stored with a corresponding JSON file to map audio
@@ -78,9 +87,6 @@ class Audio_Data_Gen:
         :param csv_path: Path to the QA pairs CSV
         :returns N/A
         '''
-
-        speaker_accent = "US" #"GB"
-        speaker = "D"
 
         self.file_mapping = {}
         sample_count = 0
@@ -92,8 +98,8 @@ class Audio_Data_Gen:
             # Build the voice request, select the language code 
             # ("en-US") and the ssml voice gender ("neutral")
             voice = texttospeech.VoiceSelectionParams(
-                language_code='en-%s' % speaker_accent,
-                name='en-%s-WaveNet-%s' % (speaker_accent, speaker))
+                language_code='en-%s' % self.accent,
+                name='en-%s-WaveNet-%s' % (self.accent, self.speaker))
 
             # Select the type of audio file you want returned
             audio_config = texttospeech.AudioConfig(
@@ -117,7 +123,10 @@ class Audio_Data_Gen:
 
             sample_count += 1
     
-    def store_data(self, answer_str, answer_audio, sample_count):
+    def store_data(self, 
+        answer_str:str, 
+        answer_audio:list, 
+        sample_count:int) -> None:
         '''
         Takes the answer str, the audio of the str, and the current file number
         and stores the audio & JSON
@@ -145,12 +154,31 @@ class Audio_Data_Gen:
         with open(json_path, "w") as outfile: 
             json.dump(self.file_mapping, outfile, indent=3) 
 
-if __name__ == "__main__":       
-    if (len(sys.argv) != 3) or \
-    (sys.argv[1][-4:] != ".csv") or \
-    (sys.argv[2][-5:] != ".json"):
-        sys.exit("Usage: python Speech_Generator.py /path/to/qa.csv"\
-                 " /path/to/auth.json")
+if __name__ == "__main__":     
+    parser = argparse.ArgumentParser(
+        description='Generates audio responses for the answers of the\
+             QA pairs CSV')
+    parser.add_argument(
+        '--json', 
+        dest="json",
+        help='Authentication JSON', 
+        required=True)
+    parser.add_argument(
+        '--csv', 
+        dest="csv",
+        help='QA Pairs CSV', 
+        required=True)
+    parser.add_argument('--accent',
+        dest="accent",
+        help='Accent of the speaker',
+        default="US")
+    parser.add_argument('--speaker',
+        dest="speaker",
+        help='Speaker voice (US: A - F | UK: A - F | AU: A - D)',
+        default="D")
+    args = parser.parse_args()  
 
-    data_gen = Audio_Data_Gen(sys.argv[2])
-    data_gen.Text_To_Speech(sys.argv[1])
+    data_gen = Audio_Data_Gen(args.json,
+                              args.accent,
+                              args.speaker)
+    data_gen.Text_To_Speech(args.csv)
