@@ -25,8 +25,10 @@ class Audio_Data_Gen:
         # contains the chunks of streamed data
         self.frames = []
 
+        # Path to the response data
         self.data_dir_path = os.path.join(os.getcwd(), data_dir_name)
 
+        # Creates data path if DNE
         if (not(os.path.isdir(self.data_dir_path))):
             os.makedirs(self.data_dir_path)
 
@@ -44,14 +46,24 @@ class Audio_Data_Gen:
         :returns answers_set: Answer string within the set
         '''
 
+        answers_set = set()
+
+        # Open the CSV
         with open(csv_path, 'r') as csv_file:
-            answers_set = set()
+
+            # Instantiate CSV object based on input CSV
             csvreader = csv.reader(csv_file)
 
+            # Remove the CSV header
             fields = next(csvreader)
 
+            # Iterate through each row
             for row in csvreader:
+
+                # Extract the cell from the 2nd column
                 answer = row[1]
+
+                # Add to set if it is not in the set
                 if (answer not in answers_set):
                     answers_set.add(answer)
 
@@ -67,14 +79,15 @@ class Audio_Data_Gen:
         :returns N/A
         '''
 
-        sample_count = 0
+        speaker_accent = "US" #"GB"
+        speaker = "D"
+
         self.file_mapping = {}
+        sample_count = 0
 
         dataset = self.read_csv(csv_path)
-        for answer_str in dataset:
 
-            speaker_accent = "US" #"GB"
-            speaker = "D"
+        for answer_str in dataset:
 
             # Build the voice request, select the language code 
             # ("en-US") and the ssml voice gender ("neutral")
@@ -115,17 +128,17 @@ class Audio_Data_Gen:
         '''
 
         file_name = "speech_sample_%s.wav" % str(sample_count)
-
         file_path = os.path.join(self.data_dir_path, file_name)
 
-        print("Audio String: %s => File Written: %s" % (answer_str, file_name))
         with open(file_path, 'wb') as out:
             out.write(answer_audio.audio_content)
 
         sound = AudioSegment.from_wav(file_path)
         sound = sound.set_channels(1)
         sound.export(file_path, format="wav")
-        
+
+        print("Audio String: %s => File Written: %s" % (answer_str, file_name))
+
         self.file_mapping[answer_str] = file_name
 
         json_path = os.path.join(self.data_dir_path, "answer_to_file.json")
