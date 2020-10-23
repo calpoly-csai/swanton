@@ -1,11 +1,8 @@
 import csv
-import io
 import json
 import numpy as np
 import os
-import pyaudio
 from pydub import AudioSegment
-import subprocess
 import sys
 import time
 import wave
@@ -15,13 +12,6 @@ from google.cloud import texttospeech
 class Audio_Data_Gen:
     
     def __init__(self, credentials="auth.json"):
-       
-        # audio input parameters
-        self.CHUNK = 2048
-        self.FORMAT = pyaudio.paInt16
-        self.CHANNELS = 1
-        self.RATE = 16000
-        self.RECORD_SECONDS = 5
 
         data_dir_name = "response_data"
 
@@ -29,24 +19,8 @@ class Audio_Data_Gen:
         self.credential_path = credentials
         os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = self.credential_path
 
-        # pyaudio i/o object instantiation
-        self.pa_o = pyaudio.PyAudio()
-
         # instantiate GCP TTS objects
         self.tts_client = texttospeech.TextToSpeechClient()
-
-        self.file_name = os.path.join(
-                os.path.dirname(__file__),
-                'resources',
-                'audio.raw')
-
-        # open an output audio data stream
-        self.ostream = self.pa_o.open(
-            format = self.FORMAT, 
-            channels = self.CHANNELS, 
-            rate = 24000, 
-            output = True, 
-            frames_per_buffer = self.CHUNK)
 
         # contains the chunks of streamed data
         self.frames = []
