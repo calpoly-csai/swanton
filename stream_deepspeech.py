@@ -1,7 +1,7 @@
 from deepspeech import Model, version
-import wave
-import pyaudio
 import numpy as np
+import pyaudio
+import sys
 from timeit import default_timer as timer
 
 # Audio constants
@@ -37,12 +37,13 @@ def run_stt(time_len=TIME_LEN):
     # Open the audio stream
     i_stream = p.open(format=FORMAT, channels=CHANNELS, rate=desired_sample_rate,
                                 input=True, output=True, frames_per_buffer=CHUNK)
-
+    print("Listening...")
     # Record audio and run inference on audio buffers
     while(timer() - stream_start < time_len):
         buff = np.frombuffer(i_stream.read(CHUNK), dtype=np.int16)
         stream.feedAudioContent(buff)
-
+        
+    print("Finished...")
     # Close the stream and call PyAudio destructor
     i_stream.stop_stream()
     i_stream.close()
@@ -57,4 +58,10 @@ def run_stt(time_len=TIME_LEN):
     return result
 
 if __name__ == "__main__":
-    run_stt(5)
+    if (len(sys.argv) != 2):
+        sys.exit("Usage: python stream_deepspeech.py {stream time}")
+
+    elif (not((sys.argv[1]).isdigit())):
+        sys.exit("Argument 'stream time' must be of type 'int'")
+
+    run_stt(int(sys.argv[1]))
