@@ -8,11 +8,15 @@ from aiy.board import Board, Led
 from deepspeech import Model, version
 from timeit import default_timer as timer
 
-from audio_response import *
-from rasa_api_call import *
+import audio_response
+import rasa_api_call
 
 MODEL_NAME = "deepspeech-0.8.1-models.tflite"
 MODEL_SCORER = "deepspeech-0.8.1-models.scorer"
+
+CHUNK = 2048  # Buffer size
+FORMAT = pyaudio.paInt16  # Sample Size
+CHANNELS = 1  # Sample Depth
 
 record_bool = True
 
@@ -54,10 +58,6 @@ def main():
     """
     global record_bool
     
-    CHUNK = 2048  # Buffer size
-    FORMAT = pyaudio.paInt16  # Sample Size
-    CHANNELS = 1  # Sample Depth
-
     response_path = os.path.join(os.getcwd(), "response_data")
 
     file_map, ds = load_data(response_path)
@@ -98,8 +98,8 @@ def main():
             result = stream.finishStream()
 
             print("result: ", result)
-            intent = Get_Intent(result)
-            Audio_Response(file_map, intent, response_path)
+            intent = rasa_api_call.get_intent(result)
+            audio_response.audio_response(file_map, intent, response_path)
                 
             p.terminate()
 

@@ -5,7 +5,7 @@ import sys
 RASA_ENDPOINT = "http://localhost:5005/webhooks/rest/webhook" 
 CONFIDENCE = 0.25
 
-def Get_Intent(
+def get_intent(
                 question_str:str,
                 endpoint:str=RASA_ENDPOINT) -> str:
     '''
@@ -49,5 +49,5 @@ def Get_Intent(
         return "Sorry, I do not know the answer to your question."
 
 if __name__ == "__main__":
-    intent = Get_Intent(sys.argv[1])
+    intent = get_intent(sys.argv[1])
     print("Intent: %s" % intent)
