@@ -10,7 +10,7 @@ CHANNELS = 1
 RATE = 16000
 DEFAULT_PATH = os.path.join(os.getcwd(), "response_data")
 
-def Audio_Response(
+def audio_response(
                     file_map:dict,
                     response_str:str,
                     response_dir:str=DEFAULT_PATH) -> None:
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     with open(response_json, "r") as in_json:
         file_map = json.load(in_json)
 
-    Audio_Response(file_map, sys.argv[1], response_path)
+    audio_response(file_map, sys.argv[1], response_path)
