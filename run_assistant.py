@@ -101,8 +101,6 @@ def main():
             print("result: ", result)
             intent = rasa_api_call.get_intent(result)
             audio_response.audio_response(file_map, intent, response_path)
-                
-            p.terminate()
 
 if __name__ == "__main__":
     main()
