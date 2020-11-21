@@ -84,7 +84,7 @@ def main():
 
             while(record_bool):
                 print("Recording...")
-                buff = np.frombuffer(i_stream.read(CHUNK), dtype=np.int16)
+                buff = np.frombuffer(i_stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
                 stream.feedAudioContent(buff)
 
             board.led.state = Led.OFF
@@ -94,14 +94,13 @@ def main():
 
             i_stream.stop_stream()
             i_stream.close()
+            p.terminate()
 
             result = stream.finishStream()
 
             print("result: ", result)
             intent = rasa_api_call.get_intent(result)
             audio_response.audio_response(file_map, intent, response_path)
-                
-            p.terminate()
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,14 @@
+[Unit]
+Description=SwantonVoiceAssistant
+
+[Service]
+ExecStart=/home/pi/swanton/start.sh
+WorkingDirectory=/home/pi/swanton
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+
