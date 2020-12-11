@@ -50,7 +50,7 @@ class Audio_Data_Gen:
             "<<GENERICS>>":set()
         }
 
-    def parse_rows(self, paths:list) -> dict:
+    def parse_rows(self, paths:list) -> set:
         '''
         Takes multiple CSVs, reads each row-by-row, and stores the answers 
         as a dict. Updates the file mapping dict on generic data
@@ -62,7 +62,7 @@ class Audio_Data_Gen:
             "Fred Swanton"
         }
 
-        :param csv_paths: List of paths to the data CSVs
+        :param paths: List of paths to the data CSVs
         :returns answers_set: Answer string within the set
         '''
 
@@ -71,7 +71,6 @@ class Audio_Data_Gen:
         }
 
         for path in paths:
-            print("File -> %s" % path)
             rows = self.read_csv(path)
             generic_name = ""
 

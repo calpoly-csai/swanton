@@ -80,7 +80,6 @@ def generate_domain(
 
     domain_str += template_str
 
-    print(domain_str)
     return domain_str
 
 def generate_nlu(
@@ -98,8 +97,6 @@ def generate_nlu(
     nlu_str = ""
 
     for intent in intents.keys():
-        print(intent)
-
         if(intents[intent] != set()):
             
             nlu_str += ("## intent:%s\n" % intent)
@@ -110,15 +107,12 @@ def generate_nlu(
             nlu_str += "\n"
 
     for gen in gen_dict.keys():
-        print(gen)
-
         nlu_str += ("## intent:%s\n" % gen)
 
         for gen_dat in gen_dict[gen]:
             nlu_str += ("- %s\n" % gen_dat)
         nlu_str += "\n"
 
-    print(nlu_str)
     return nlu_str
     
 def create_generic(
@@ -149,23 +143,16 @@ def create_generic(
     gen_dict = {}
     dict_index = {}
 
-    print("Generic: ", generic)
-
     # Add fields with empty lists to the dict
     for i, field in enumerate(fields):
-        print("Field: ", field)
         gen_dict[field] = []
         dict_index[str(i)] = field
 
     # Add each generic sample to the dictionary
     for row in generic:
-        print("Row: ", row)
         for i, col in enumerate(row):
-            print("Col: ", col)
             if (col != ''):
                 gen_dict[dict_index[str(i)]].append(col)
-
-    print(gen_dict)
 
     return gen_dict
 
@@ -193,8 +180,6 @@ def generate_stories(
         story_type = story_row[0]
         story_dets = story_row[1:]
         
-        print("Row: ", story_row)
-
         if (story_type == "PATH"):
             path_name = story_dets[0]
             story_str += "## %s\n" % story_dets[0]
@@ -230,11 +215,6 @@ def generate_stories(
         else:
             print("Error: Invalid story type of %s" % story_type)
             exit()
-
-
-    print("Story Str: ", story_str)
-    print("Utterances: ", utterances)
-    print("Intents: ", intents)
 
     return story_str, intents, utterances
 
@@ -272,7 +252,6 @@ def read_csv(csv_path: str) -> list:
             for col in row:
                 row_dat.append(col)
 
-            print("Row: %s" % row_dat)
             csv_contents.append(row_dat)
 
     return csv_contents, fields
