@@ -73,14 +73,14 @@ class Audio_Data_Gen:
 
                 elif (row[0] == "GENNAME"):
                     generic_name = row[1]
-                    self.file_mapping["<<%s>>" % generic_name] = []
+                    self.file_mapping["<<GEN>>%s" % generic_name] = []
                     self.file_mapping["<<GENERICS>>"].append(generic_name)
 
                 elif (row[0] == "GENERIC"):
                     if (answer not in answers_dict):
                         answers_dict[answer] = "0"
 
-                    self.file_mapping["<<%s>>" % generic_name].append(answer)
+                    self.file_mapping["<<GEN>>%s" % generic_name].append(answer)
 
         return answers_dict
 
