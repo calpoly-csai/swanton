@@ -47,13 +47,27 @@ class Audio_Data_Gen:
             os.makedirs(self.data_dir_path)
 
         self.file_mapping = {
-            "<<GENERICS>>":[]
+            "<<GENERICS>>":set()
         }
 
     def parse_rows(self, paths:list) -> dict:
+        '''
+        Takes multiple CSVs, reads each row-by-row, and stores the answers 
+        as a dict. Updates the file mapping dict on generic data
+        An example is as follows:
 
-        answers_dict = {
-            "Sorry, I do not know the answer to your question." : "0"
+        answers_set = {
+            "Sorry, I do not know the answer to your question.",
+            "The ranch is 3200 acres.",
+            "Fred Swanton"
+        }
+
+        :param csv_paths: List of paths to the data CSVs
+        :returns answers_set: Answer string within the set
+        '''
+
+        answers_set = {
+            "Sorry, I do not know the answer to your question."
         }
 
         for path in paths:
@@ -68,35 +82,28 @@ class Audio_Data_Gen:
                 if (row[0] not in disallowed_set):
 
                     # Add to set if it is not in the set
-                    if (answer not in answers_dict):
-                        answers_dict[answer] = "0"
+                    if (answer not in answers_set):
+                        answers_set.add(answer)
 
                 elif (row[0] == "GENNAME"):
                     generic_name = row[1]
                     self.file_mapping["<<GEN>>%s" % generic_name] = []
-                    self.file_mapping["<<GENERICS>>"].append(generic_name)
+                    self.file_mapping["<<GENERICS>>"].add(generic_name)
 
                 elif (row[0] == "GENERIC"):
-                    if (answer not in answers_dict):
-                        answers_dict[answer] = "0"
+                    if (answer not in answers_set):
+                        answers_set.add(answer)
 
                     self.file_mapping["<<GEN>>%s" % generic_name].append(answer)
 
-        return answers_dict
+        return answers_set
 
-    def read_csv(self, csv_path: str) -> set:
+    def read_csv(self, csv_path: str) -> list:
         '''
-        Reads the CSV row-by-row and stores the answers as a set. 
-        An example is as follows:
-
-        answers_set = {
-            "Sorry, I do not know the answer to your question.",
-            "The ranch is 3200 acres.",
-            "Fred Swanton"
-        }
+        Reads the CSV row-by-row and stores the rows as a list of strs. 
 
         :param csv_path: Path to the QA pairs CSV
-        :returns answers_set: Answer string within the set
+        :returns rows: List of strs of each row of a CSV
         '''
         rows = []
 
@@ -132,7 +139,7 @@ class Audio_Data_Gen:
         dataset = self.parse_rows(csv_paths)
 
         for answer_str in dataset:
-            if answer_str not in self.file_mapping:
+            if answer_str not in self.file_mapping["<<GENERICS>>"]:
                 # Build the voice request, select the language code 
                 # ("en-US") and the ssml voice gender ("neutral")
                 voice = texttospeech.VoiceSelectionParams(
@@ -187,7 +194,7 @@ class Audio_Data_Gen:
         print("Audio String: %s => File Written: %s" % (answer_str, file_name))
 
         self.file_mapping[answer_str] = file_name
-
+        self.file_mapping["<<GENERICS>>"] = list(self.file_mapping["<<GENERICS>>"])
         json_path = os.path.join(self.data_dir_path, "answer_to_file.json")
         with open(json_path, "w") as outfile: 
             json.dump(self.file_mapping, outfile, indent=3) 
