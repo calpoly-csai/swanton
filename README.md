@@ -1,5 +1,6 @@
 # swanton
-Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi. 
+Swanton Pacific Ranch chatbot with a knowledge graph on a Raspberry Pi.
+Please refer to the [Cal Poly CSAI Docs](https://docs.calpolycsai.com/projects/swanton-ranch-ai) for more information about setup and operation.
 ## Getting Started
 
 ### Step 1 - Setup a fresh Debian 10 or Raspbian image
