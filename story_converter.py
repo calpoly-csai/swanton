@@ -18,16 +18,22 @@ def main() -> None:
         help='Chatbot story CSV', 
         required=True)
     parser.add_argument(
-        '--generic', 
-        dest="generic",
-        help='Generic Utterances & Intents CSV', 
+        '--utter', 
+        dest="utter",
+        help='Utterances CSV', 
         required=True)
+    parser.add_argument(
+        '--intent', 
+        dest="intent",
+        help='Intents CSV', 
+        required=True)        
     args = parser.parse_args()
 
-    story_dat = read_csv(args.stories)[0]
-    gen_dat, fields = read_csv(args.generic)   
+    story_dat, _ = read_csv(args.stories)
+    intent_dat, fields = read_csv(args.intent)   
+    utter_dat, _ = read_csv(args.utter)   
 
-    gen_dict = create_generic(fields, gen_dat)
+    gen_dict = create_generic(fields, intent_dat, utter_dat)
 
     story_str, intents, utterances = generate_stories(story_dat, gen_dict) 
     nlu_str = generate_nlu(intents, gen_dict)
@@ -48,7 +54,7 @@ def store_file(
 
     '''
 
-    with open(file_path, "w") as open_file:
+    with open(file_path, "w", encoding='utf-8') as open_file:
         open_file.write(file_str)
 
     print("Data has been stored in %s" % file_path)
@@ -79,7 +85,10 @@ def generate_domain(
         template_str += ("  - text: \"%s\"\n\n" % utterances[utter])
 
     domain_str += template_str
-
+    domain_str += "session_config:\n"
+    domain_str += "  session_expiration_time: 60\n"
+    domain_str += "  carry_over_slots_to_new_session: true\n"
+    
     return domain_str
 
 def generate_nlu(
@@ -114,10 +123,44 @@ def generate_nlu(
         nlu_str += "\n"
 
     return nlu_str
+
+def parse_utter(utter_dat:list) -> dict:
+    '''
+    Parses through the utterance data and stores them into a dict.
+
+    :param utter_dat: list of the rows from the generic utterance CSV
+    :return gen_dat: dict of utterances
     
+    '''
+    generic_name = ""
+    gen_dat = {}
+
+    for row in utter_dat:
+
+        if (row[0] == "GENNAME"):
+            generic_name = row[1]
+            gen_dat[generic_name] = []
+
+        elif (row[0] == "GENERIC"):
+            if (generic_name not in gen_dat):
+                print("Error: %s has not been defined." % generic_name)
+
+            else:
+                gen_dat[generic_name].append(row[1])
+
+        elif (row[0] == ""):
+            pass
+
+        else:
+            print("Error: Invalid format of %s in utterance dataset." % row[0])
+            exit()
+
+    return gen_dat
+
 def create_generic(
                     fields:list,
-                    generic:list) -> dict:
+                    intent_dat:list,
+                    utter_dat:list) -> dict:
     '''
     Parses through the generic data rows and creates the list of generic
     responses.
@@ -134,13 +177,15 @@ def create_generic(
                             ]
     }
     :param fields: list of strs that are the fields of the CSV data
-    :param generic: list of str lists that represent each row of the generic
+    :param intent_dat: list of str lists that represent each row of the intent
+                    data CSV
+    :param utter_dat: list of str lists that represent each row of the utter
                     data CSV
 
     :returns gen_dict: dictionary of the generic data
     '''
 
-    gen_dict = {}
+    gen_dict = parse_utter(utter_dat)
     dict_index = {}
 
     # Add fields with empty lists to the dict
@@ -149,7 +194,7 @@ def create_generic(
         dict_index[str(i)] = field
 
     # Add each generic sample to the dictionary
-    for row in generic:
+    for row in intent_dat:
         for i, col in enumerate(row):
             if (col != ''):
                 gen_dict[dict_index[str(i)]].append(col)
@@ -189,7 +234,8 @@ def generate_stories(
                 story_str += ("* %s\n" % story_dets[0])
                 intents[story_dets[0]] = set()
             else:
-                curr_intent = story_dets[0].replace(" ", "_")
+                curr_intent = re.sub(r'[^\w\s]','',story_dets[0]) 
+                curr_intent = curr_intent.replace(" ", "_")
 
                 story_str += ("* %s\n" % curr_intent)
 
@@ -201,7 +247,8 @@ def generate_stories(
                         intents[curr_intent].add(story_det)
 
         elif (story_type == "UTTER"):
-            curr_utter = "utter_%s" % story_dets[0].replace(" ", "_")
+            curr_utter = re.sub(r'[^\w\s]','',story_dets[0]) 
+            curr_utter = "utter_%s" % curr_utter.replace(" ", "_")
             story_str += ("  - %s\n" % curr_utter)
             utterances[curr_utter] = story_dets[0]
 
