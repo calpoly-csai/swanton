@@ -5,11 +5,13 @@ import pyaudio
 import wave
 
 from aiy.board import Board, Led
+from datetime import datetime
 from deepspeech import Model, version
 from timeit import default_timer as timer
 
 import audio_response
 import rasa_api_call
+import log_input
 
 MODEL_NAME = "deepspeech-0.8.1-models.tflite"
 MODEL_SCORER = "deepspeech-0.8.1-models.scorer"
@@ -62,7 +64,11 @@ def main():
 
     file_map, ds = load_data(response_path)
 
+    file_map["<<GENERICS>>"] = set(file_map["<<GENERICS>>"])
+
     desired_sample_rate = ds.sampleRate()
+
+    p = pyaudio.PyAudio()
 
     with Board() as board:
         board.button.when_released = end_record
@@ -75,7 +81,6 @@ def main():
             frames = []
 
             stream = ds.createStream()
-            p = pyaudio.PyAudio()
 
             i_stream = p.open(format=FORMAT, channels=CHANNELS, rate=desired_sample_rate,
                                         input=True, output=True, frames_per_buffer=CHUNK)
@@ -94,13 +99,26 @@ def main():
 
             i_stream.stop_stream()
             i_stream.close()
-            p.terminate()
 
             result = stream.finishStream()
 
             print("result: ", result)
-            intent = rasa_api_call.get_intent(result)
-            audio_response.audio_response(file_map, intent, response_path)
+            intents = rasa_api_call.get_intent(result)
+            
+            now = datetime.now()
+
+            log_input.log_to_csv({
+                                    "question"      : result,
+                                    "answer"        : ' '.join(str(resp) for resp in intents),
+                                    "time"          : now.strftime("%m/%d/%Y %H:%M:%S"),
+                                    "confidence"    : "N/A"
+                                 })
+
+
+            for intent in intents:
+                audio_response.audio_response(file_map, intent, response_path)
+
+    p.terminate()
 
 if __name__ == "__main__":
     main()

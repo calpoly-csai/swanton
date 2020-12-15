@@ -1,7 +1,9 @@
 import json
 import os
 import pyaudio
+import random
 import sys
+import time
 import wave
 
 CHUNK = 2048
@@ -31,7 +33,11 @@ def audio_response(
         output = True, 
         frames_per_buffer = CHUNK)
 
-    if (response_str not in file_map):
+    if (response_str in file_map["<<GENERICS>>"]):
+        ran_resp = random.choice(file_map["<<GEN>>%s" % response_str])
+        file_name = file_map[ran_resp]
+
+    elif (response_str not in file_map):
         file_name = file_map["Sorry, I do not know "\
         "the answer to your question."]
 
@@ -50,6 +56,8 @@ def audio_response(
     print("Playing file => \"%s\"" % file_path)
 
     ostream.write(wf.readframes(wf.getnframes()))
+
+    time.sleep(1)
 
 if __name__ == "__main__":
     response_path = os.path.join(os.getcwd(), "response_data")
