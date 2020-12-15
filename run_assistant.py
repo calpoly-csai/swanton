@@ -114,7 +114,6 @@ def main():
                                     "confidence"    : "N/A"
                                  })
 
-
             for intent in intents:
                 audio_response.audio_response(file_map, intent, response_path)
 
