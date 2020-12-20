@@ -1,129 +1,154 @@
-## intent:Donated_by_Cal_Poly_alumnus_Al_Smith
+## intent:How_did_Cal_Poly_get_Swanton_Pacific_Ranch
+- Who gifted Swanton to Cal Poly?
 - How did Cal Poly get Swanton Pacific Ranch?
+- How did the school get the ranch?
 
-## intent:Swanton_Pacific_Ranch_is_3200_acres
+## intent:How_big_is_Swanton_Pacific_Ranch
+- What is the size of Swanton?
 - How big is Swanton Pacific Ranch?
+- Can you give me the ranch's acreage?
 
-## intent:No_except_during_specific_times_Including_apple_picking_in_the_Fall_Al_Smith_Days_Cal_Poly_Days_and_Swanton_Pacific_Railroad_Days
+## intent:Is_Swanton_Pacific_Ranch_open_to_the_public
 - Is Swanton Pacific Ranch open to the public?
 
-## intent:The_property_is_a_private_research_and_educational_ranch_and_is_not_open_to_the_public
-- Can I camp or hike in Swanton Pacific Ranch?
+## intent:Can_I_camp_or_hike_in_Swanton_Pacific_Ranch
 - May I camp or hike in Swanton Pacific Ranch?
+- Can I camp or hike in Swanton Pacific Ranch?
 
-## intent:During_special_events_held_by_Cal_Poly_Swanton_Pacific_Railroad_and_when_apples_are_for_sale
+## intent:When_is_Swanton_Pacific_Ranch_open_to_the_public
 - When is Swanton Pacific Ranch open to the public?
 
-## intent:The_SpanishMexican_name_was_Rancho_Agua_Puerca_y_Las_Trancas
-- What was the original name of Swanton Pacific Ranch>
+## intent:What_was_the_original_name_of_Swanton_Pacific_Ranch
+- What was the original name of Swanton Pacific Ranch?
 
-## intent:Due_to_an_English_translation_error_during_a_legal_proceeding_regarding_ownership_the_land_grants_boundaries_were_described_in_a_way_that_the_northeasterly_boundary_would_have_included_Modesto_California
+## intent:What_is_a_fun_fact_about_the_Rancho
 - What is a fun fact about the Rancho?
 
-## intent:Search_for_Swanton_Pacific_Ranch_California_in_your_internet_browser
+## intent:How_do_I_learn_more_about_Swanton_Pacific_Ranch
 - How do I learn more about Swanton Pacific Ranch?
 
-## intent:The_building_contains_offices_and_computer_for_Ranch_staff_and_a_kitchen_and_dining_room_facility_for_Cal_Poly_students_interns_and_students_It_is_one_of_the_few_buildings_that_survived_the_2020_CZU_Lightning_Fire
-- What is the Green House used for?
+## intent:What_is_the_Green_House_used_for
 - What is Casa Verde used for?
+- What is the Green House used for?
 
-## intent:It_was_built_as_a_house_for_dairy_operations_on_the_Ranch_It_is_one_of_the_few_buildings_that_survived_the_2020_CZU_Lightning_Fire
+## intent:What_can_you_tell_me_about_the_Green_House
 - What can you tell me about the Green House?
 
-## intent:Originally_it_was_the_home_of_Swiss_dairyman_Ambrogio_Gianone_who_leased_it_from_James_ArchibaldIt_is_one_of_the_few_buildings_that_survived_the_2020_CZU_Lightning_Fire
-- What can you tell me about the Green House?
-
-## intent:Gianone_later_bought_more_land_know_as_Gianone_Hill_where_fourth_generation_children_It_is_one_of_the_few_buildings_that_survived_the_2020_CZU_Lightning_Fire
-- What can you tell me about the Green House?
-
-## intent:It_was_built_in_1867
+## intent:How_old_is_the_Cheese_House
 - How old is the Cheese House?
 
-## intent:Storage_and_aging_cheese_for_commercial_purposes
+## intent:What_was_the_Cheese_House_used_for
 - What was the Cheese House used for?
 
-## intent:Historical_lore_has_it_that_the_Cheese_House_was_where_Monterey_Jack_Cheese_was_first_developed
+## intent:What_can_you_tell_me_about_the_Cheese_House
 - What can you tell me about the Cheese House?
 
-## intent:The_Cheese_House
+## intent:What_is_that_stone_building_falling_down
 - What is that stone building falling down?
 
-## intent:TBD
-- Why has the stone building not been fixed?
-
-## intent:The_locality_and_town_of_Swanton_were_referred_to_by_a_number_of_names_but_the_name_Swanton_was_solidified_in_the_late_1800s_after_Fred_Swanton_He_was_a_businessman_and_mayor_of_Santa_Cruz_He_damed_a_local_creek_to_created_a_hyroelectric_plant_to_provide_Santa_Cruz_with_electriciy_
+## intent:Where_did_Swanton_get_its_name
 - Where did Swanton get its name?
 
-## intent:One_square_league_roughly_4300_acres
+## intent:What_does_Una_Legua_Cuadrada_mean_in_Spanish
 - What does Una Legua Cuadrada mean in Spanish?
 
-## intent:It_is_the_traditional_Spanish_unit_of_area_equal_to_one_square_legua_league_roughly_434028_acres
+## intent:What_was_the_original_size_of_the_land_grant_now_know_as_Swanton
 - What was the original size of the land grant now know as Swanton?
 
-## intent:Until_recently_have_scholars_started_to_understand_that_the_group_they_have_referred_to_as_the_Ohlone_have_approximately_up_to_50_nation_groups_and_language_groups
-- What is the official name of Scott Creek? Is it Scott Creek, Scotts or Scott’s Creek,
+## intent:What_is_the_official_name_of_Scott_Creek_Is_it_Scott_Creek_Scotts_or_Scotts_Creek
+- What is the official name of Scott Creek? Is it Scott Creek, Scotts or Scott's Creek,
 
-## intent:Tribal_distinctions_are_now_recognized_between_the_Amah_Mutsun_Tribal_Band_and_the_OhloneCostanoan_Esselen_Nation_When_referring_to_the_land_base_of_Swanton_it_is_more_specifically_the_ancestral_land_of_the_Amah_Mutsun
+## intent:What_group_of_Indigenous_Peoples_lived_in_the_Swanton_area_before_Spanish_colonization
 - What group of Indigenous Peoples lived in the Swanton area before Spanish colonization?
 
-## intent:The_descendants_of_the_Indigenous_Peoples_that_inhabited_the_area_now_referred_to_as_Swanton_identify_as_Amah_Mutsun
-- What group of Indigenous Peoples lived in the Swanton area before Spanish colonization?
-
-## intent:Ethnologists_and_anthropologists_have_consistently_characterized_indigenous_Californian_cultures_simplistically_ignoring_complexities_and_variation_However_anthropologists_have_now_begun_a_reassessment_of_groups_such_as_the_Ohlone_who_inhabited_what_is_now_Santa_Cruz_and_believe_their_linguistic_complexity_and_cultural_continuity_make_them_unique_among_the_indigenous_peoples_of_the_North_American_continent
+## intent:Why_are_the_Indigenous_Peoples_of_Swanton_usually_referred_to_as_the_Ohlone
 - Why are the Indigenous Peoples of Swanton usually referred to as the Ohlone?
 
-## intent:The_Native_Americans_that_lived_from_Monterey_to_San_Francisco_were_first_referred_to_as_Costanoan_which_is_missionization_Spanish_for_coastal_peoples_and_later_as_the_Ohlone_possibly_in_reference_to_the_Olijan_Rancho_near_San_Francisco
-- Why are the Indigenous Peoples of Swanton usually referred to as the Ohlone?
-
-## intent:Until_recently_have_scholars_started_to_understand_that_the_group_they_have_referred_to_as_the_Ohonline_have_approximately_up_to_50_nation_groups_and_language_groups
-- Why are the Indigenous Peoples of Swanton usually referred to as the Ohlone?
-
-## intent:Approximately_15_or_more_of_all_of_Californias_native_and_nonnative_plants_live_within_the_geomorphological_boundaries_of_the_watershed
+## intent:How_many_plants_have_been_identified_in_the_SwantonScott_Creek_Watershed
 - How many plants have been identified in the Swanton/Scott Creek Watershed?
 
-## intent:Between_1770_and_1835_missionization_gradually_depleted_the__population_as_well_as_the_hunting_and_gathering_on_the_landscape_that_would_become_Swanton_Valley_and_Santa_Cruz__The_disruption_of_their_cultures_stable_and_successful_ecological_adaptations_significantly_contributed_to_its_devastation_The_collapse_of_the_population_was_also_attributed_to_the_introduction_of_disease_baptism_and_forced_conversion_and_declining_birth_rates__
+## intent:What_happened_to_the_Indigenous_People_of_Swanton_and_what_is_now_know_as_Santa_Cruz
 - What happened to the Indigenous People of Swanton and what is now know as Santa Cruz?
 
-## intent:Imperial_Spains_colonization_of_California_began_in_1697
+## intent:When_did_Spanish_colonization_of_California_begin
 - When did Spanish colonization of California begin?
 
-## intent:Mexico_officially_assumed_control_of_the_area_at_that_time_The_last_governor_sent_to_California_from_Mexico_City_was_Manuel_Micheltorena_who_came_in_1842_and_served_until_1845_In_1848_California_was_acquired_by_the_United_States_under_the_terms_of_the_Treaty_of_Guadalupe_Hidalgo
+## intent:When_did_Mexico_take_control_of_California
 - When did Mexico take control of California?
 
-## intent:The_Santa_Cruz_Mission_began_on_September_25_1792_with_donations_from_local_missions_during_Spanish_rule__The_first_stone_was_laid_on_February_23_1793_and_dedicated_in_March_1794_Subsequently_the_Mexican_government_secularized_the_Mission_in_1834__In_1857_the_Mission_was_completely_destroyed_by_an_earthquake_
+## intent:When_was_the_Santa_Cruz_mission_built
 - When was the Santa Cruz mission built?
 
-## intent:Agua_Puerca_y_las_Trancas_translated_as_hog_water_and_the_bars_originally_known_as_Rancho_el_Jarro_HIstorians_have_said_that_Agua_Puerca_probably_refers_to_the_stagnant_water_in_the_stream_which_comes_out_at_Davenport_Landing_the_original_southerly_boundary_of_the_rancho_and_Las_Trancas_refers_to_placing_poles_for_a_gate_or_barrier_in_a_narrow_canyon_just_south_of_Waddell_Creek
+## intent:What_was_the_original_name_of_the_land_grant_that_Swanton_was_part_of
 - What was the original name of the land grant that Swanton was part of?
 
-## intent:On_November_2_1843_the_Rancho_Agua_Puerca_y_las_Trancas_land_grant_was_made_to_brothersinlaw_Ramn_Rodrguez_and_Francisco_Alviso_by_Mexican_Governor_Manuel_Micheltorena
-- Who was given the title to the orginial land grant?
+## intent:Who_was_given_the_title_to_the_original_land_grant
+- Who was given the title to the original land grant?
 
-## intent:After_both_the_MexicanAmerican_War_of_184648_and_Californias_establishment_as_a_state_in_1850_land_grant_ownership_required_validation_The_same_year_1867_Ramn_Rodrguez_and_Francisco_Alviso_had_thier_ownership_validated_they_sold_it_to_James_Archibald
+## intent:When_did_James_Archibald_purchase_the_land
 - When did James Archibald purchase the land?
 
-## intent:He_was_born_in_Scotland_and_immigrated_to_the_United_States
+## intent:Where_was_James_Archibald_from
 - Where was James Archibald from?
 
-## intent:James_Archibald_farmed_the_land_and_arranged_to_have_a_Swiss_dairyman_Ambrogio_Gianone_run_the_dairy
+## intent:What_did_James_Archibald_do_with_the_land
 - What did James Archibald do with the land?
 
-## intent:Swiss_dairyman_Ambrogio_Gianone_built_the_cheese_house_a_rock_house_cheese_factory
+## intent:Who_built_the_cheese_house
 - Who built the cheese house?
 
-## intent:At_some_point_Ambrogio_Gianone_bought_the_north_third_of_the_Rancho_where_Swanton_Road_crosses_back_over_the_ridge_It_is_known_locally_as_Gianone_Hill_and_there_are_two_families_with_fourth_generation_children_living_there_today
+## intent:Did_Ambrogio_Gianone_ever_leave_and_buy_property_of_his_own
 - Did Ambrogio Gianone ever leave and buy property of his own?
 
-## intent:One_name_Swanton_was_previoulsy_called_was_Laurel_Grove_There_was_a_need_for_a_post_office_The_locals_liked_the_name_Laurel_Grove_the_name_of_the_inn_and_the_livery_stable_and_petitioned_the_Postal_Service_but_Fred_Swanton_knew_a_US_Senator_thus_the_post_office_was_designated_as_Swanton_in_1897
+## intent:Are_there_other_names_that_Swanton_has_been_called_after_becoming_a_state
 - Are there other names that Swanton has been called after becoming a state?
 
-## intent:One_name_Swanton_was_previoulsy_called_was_Ingalls_Station_
-- Are there other names that Swanton has been called after becoming a state?
-
-## intent:In_April_1897_Pasquale_Sonognini_a_driver_of_the_Santa_CruzPescadero_stage_applied_for_a_post_office_to_be_known_as_Trancas_near_the_junction_of_Scott_and_Big_creeks_and_on_the_Santa_Cruz_and_Pescadero_Stage_Road_now_Swanton_Road_When_the_Post_Office_Department_approved_the_office_for_opening_May_28_1897_it_bestowed_upon_it_the_name_of_Swanton_The_post_office_was_closed_on_December_31_1930_
+## intent:When_did_the_Swanton_post_office_open
 - When did the Swanton post office open?
+
+## intent:When_did_the_Swanton_post_office_close
 - When did the Swanton post office close?
 
-## intent:Some_sources_states_that_the_post_office_was_proposed_to_be_named_Trancas_some_say_Laurel_Grove_There_has_been_speculation_that_Fred_Swanton_knew_a_senator_and_his_wishes_overruled_an_Italian_immigrants_name_application_considering_the_time_period_and_Swantons_place_in_society
+## intent:What_was_the_suggested_name_for_the_first_local_post_office
 - What was the suggested name for the first local post office?
+
+## intent:CLOSING
+- Have a great day!
+- Good bye!
+- See you later.
+- Enjoy your day.
+
+## intent:GREENHOUSE
+- The Green House was built as a house for dairy operations on the Ranch. It is one of the few buildings that survived the 2020 CZU Lightning Fire.
+- Originally it was the home of Swiss dairyman, Ambrogio Gianone, who leased it from James Archibald.It is one of the few buildings that survived the 2020 CZU Lightning Fire.
+- Gianone later bought more land, know as Gianone Hill, where fourth generation children. It is one of the few buildings that survived the 2020 CZU Lightning Fire.
+
+## intent:INDIGGROUP
+- Tribal distinctions are now recognized between the Amah Mutsun Tribal Band and the Ohlone/Costanoan Esselen Nation. When referring to the land base of Swanton it is more specifically the ancestral land of the Amah Mutsun.
+- The descendants of the Indigenous Peoples that inhabited the area now referred to as Swanton identify as Amah Mutsun
+
+## intent:OHLONE
+- Ethnologists and anthropologists have consistently characterized indigenous Californian cultures simplistically, ignoring complexities and variation. However, anthropologists have now begun a reassessment of groups such as the Ohlone, who inhabited what is now Santa Cruz, and believe their linguistic complexity and cultural continuity make them unique among the indigenous peoples of the North American continent.
+- The Native Americans that lived from Monterey to San Francisco were first referred to as Costanoan (which is missionization Spanish for "coastal peoples") and later as the Ohlone (possibly in reference to the Olijan Rancho near San Francisco).
+- Until recently have scholars started to understand that the group they have referred to as the Ohonline have approximately up to 50 nation groups and language groups.
+
+## intent:PSEUDONYM
+- One name Swanton was previoulsy called was Laurel Grove. There was a need for a post office. The locals liked the name Laurel Grove, the name of the inn and the livery stable, and petitioned the Postal Service, but Fred Swanton knew a U.S. Senator thus the post office was designated as Swanton in 1897.
+- One name Swanton was previoulsy called was Ingalls Station. 
+
+## intent:CONFIRM
+- Yes.
+- I would like to know.
+- Please tell me.
+- Yeah.
+- Okay.
+- I am interested.
+
+## intent:REJECT
+- No thank you.
+- Nope.
+- I am not interested.
+- No thanks.
+- No.
+- Nah.
 
