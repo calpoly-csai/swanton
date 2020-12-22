@@ -42,7 +42,7 @@ services:
       - web-root:/var/www/html
     depends_on:
       - nginx
-    command: certonly --non-interactive --webroot --webroot-path=/var/www/html --email csaicalpoly@gmail.com --agree-tos --no-eff-email -d swanton.calpolycsai.com
+    command: certonly --non-interactive --webroot --webroot-path=/var/www/html --email csaicalpoly@gmail.com --agree-tos --no-eff-email -d swantonpoppy.org -d www.swantonpoppy.org
 
 volumes:
   certbot-etc:
