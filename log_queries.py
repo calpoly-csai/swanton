@@ -20,7 +20,7 @@ def config_api():
     """
     Configures the Google Sheets API service to be used for appending data
 
-    :return: The service as a Resource object
+    :return: The service as a Resource object, or None if there is no pickle and the authentication JSON can't be found
     """
 
     creds = None
@@ -37,8 +37,11 @@ def config_api():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                AUTH_PATH, SCOPES)
+            try:
+                flow = InstalledAppFlow.from_client_secrets_file(AUTH_PATH, SCOPES)
+            except FileNotFoundError as e:
+                print(e)
+                return None
             creds = flow.run_local_server(port=0)
 
         # Save the credentials for the next run
@@ -64,9 +67,12 @@ def log_query(service, question: str, answer: str) -> None:
         'values': values
     }
 
-    service.spreadsheets().values().append(
-        spreadsheetId=SPREADSHEET_ID,
-        range=RANGE_NAME,
-        valueInputOption='RAW',
-        body=body
-    ).execute()
+    try:
+        service.spreadsheets().values().append(
+            spreadsheetId=SPREADSHEET_ID,
+            range=RANGE_NAME,
+            valueInputOption='RAW',
+            body=body
+        ).execute()
+    except Exception as e:
+        print(e)
