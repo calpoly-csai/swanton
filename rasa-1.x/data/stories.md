@@ -1,3 +1,18 @@
+## Greeting # 1
+* GREETING
+  - utter_GREETINGRESPONSE
+  - utter_Would_you_like_to_know_an_interesting_fact_about_the_ranch
+* REJECT
+  - utter_CLOSING
+
+## Greeting # 2
+* GREETING
+  - utter_GREETINGRESPONSE
+  - utter_Would_you_like_to_know_an_interesting_fact_about_the_ranch
+* CONFIRM
+  - utter_FACT
+  - utter_CLOSING
+
 ## Swanton Name # 1
 * How_did_Cal_Poly_get_Swanton_Pacific_Ranch
   - utter_Swanton_Pacific_Ranch_was_donated_to_Cal_Poly_by_Cal_Poly_alumnus_Al_Smith
@@ -137,7 +152,7 @@
   - utter_CLOSING
 
 ## Indigenous People of Swanton # 1
-* What_happened_to_the_Indigenous_People_of_Swanton_and_what_is_now_know_as_Santa_Cruz
+* What_happened_to_the_Indigenous_People_of_Swanton_and_what_is_now_known_as_Santa_Cruz
   - utter_Between_1770_and_1835_missionization_gradually_depleted_the__population_as_well_as_the_hunting_and_gathering_on_the_landscape_that_would_become_Swanton_Valley_and_Santa_Cruz__The_disruption_of_their_cultures_stable_and_successful_ecological_adaptations_significantly_contributed_to_its_devastation_The_collapse_of_the_population_was_also_attributed_to_the_introduction_of_disease_baptism_and_forced_conversion_and_declining_birth_rates__
   - utter_CLOSING
 
