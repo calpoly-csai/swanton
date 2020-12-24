@@ -11,7 +11,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']  # Allows read and write access
 
 # The ID, range, and auth path for appending to the spreadsheet.
-SPREADSHEET_ID = '15f_zVJxNnUz_9G5ZYPery68rR8PyUnO0yWKSyGQjy4w'
+SPREADSHEET_ID = ''
 RANGE_NAME = 'A1'  # Should always place the new query correctly at the bottom of the table
 AUTH_PATH = 'credentials.json'
 
@@ -51,28 +51,33 @@ def config_api():
     return build('sheets', 'v4', credentials=creds)
 
 
-def log_query(service, question: str, answer: str) -> None:
+def log_query(service, question: str, answer: str, sentiment: str = "N/A", spreadsheet_id: str = SPREADSHEET_ID) -> int:
     """
     Logs a user query and chat bot response to a Google Sheet as well as the timestamp
 
     :param service: Google Sheets API service
     :param question: User question
     :param answer: Chat bot answer
-    :return: None
+    :param sentiment: Positive or negative sentiment associated with the question/answer, currently defaults to "N/A"
+    :param spreadsheet_id: ID of the spreadsheet to append to, currently defaults to an empty string
+    :return: 0 on success, 1 on failure
     """
 
     timestamp = str(datetime.datetime.now())
-    values = [[question, answer, timestamp]]
+    values = [[question, answer, sentiment, timestamp]]
     body = {
         'values': values
     }
 
     try:
         service.spreadsheets().values().append(
-            spreadsheetId=SPREADSHEET_ID,
+            spreadsheetId=spreadsheet_id,
             range=RANGE_NAME,
             valueInputOption='RAW',
             body=body
         ).execute()
     except Exception as e:
         print(e)
+        return 1
+
+    return 0
