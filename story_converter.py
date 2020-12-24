@@ -79,10 +79,17 @@ def generate_domain(
         
     domain_str += "\nactions:\n"
 
+    print(utterances)
+
     for utter in utterances.keys():
         domain_str += ("  - %s\n" % utter)
+
         template_str += ("  %s:\n" % utter)
-        template_str += ("  - text: \"%s\"\n\n" % utterances[utter])
+
+        for utter_sample in utterances[utter]:            
+            utter_norm = utter_sample.replace("\"", "\'")
+            template_str += ("  - text: \"%s\"\n" % utter_sample)
+        template_str += "\n"
 
     domain_str += template_str
     domain_str += "session_config:\n"
@@ -116,11 +123,12 @@ def generate_nlu(
             nlu_str += "\n"
 
     for gen in gen_dict.keys():
-        nlu_str += ("## intent:%s\n" % gen)
+        if gen in intents:
+            nlu_str += ("## intent:%s\n" % gen)
 
-        for gen_dat in gen_dict[gen]:
-            nlu_str += ("- %s\n" % gen_dat)
-        nlu_str += "\n"
+            for gen_dat in gen_dict[gen]:
+                nlu_str += ("- %s\n" % gen_dat)
+            nlu_str += "\n"
 
     return nlu_str
 
@@ -199,6 +207,7 @@ def create_generic(
             if (col != ''):
                 gen_dict[dict_index[str(i)]].append(col)
 
+    print(gen_dict)
     return gen_dict
 
 def generate_stories(
@@ -220,6 +229,8 @@ def generate_stories(
     utterances = {}
     story_str = ""
     path_name = ""
+
+    print("gen dict", gen_dict)
 
     for story_row in stories:
         story_type = story_row[0]
@@ -250,7 +261,12 @@ def generate_stories(
             curr_utter = re.sub(r'[^\w\s]','',story_dets[0]) 
             curr_utter = "utter_%s" % curr_utter.replace(" ", "_")
             story_str += ("  - %s\n" % curr_utter)
-            utterances[curr_utter] = story_dets[0]
+
+            if story_dets[0] in gen_dict:
+                utterances[curr_utter] = gen_dict[story_dets[0]]
+
+            else: 
+                utterances[curr_utter] = [story_dets[0]]
 
         elif ((story_type == "GENERIC") or (story_type == "GENNAME")):
             print("Generic utterance... skipping...")
@@ -262,6 +278,8 @@ def generate_stories(
         else:
             print("Error: Invalid story type of %s" % story_type)
             exit()
+
+    # print(utterances)
 
     return story_str, intents, utterances
 
