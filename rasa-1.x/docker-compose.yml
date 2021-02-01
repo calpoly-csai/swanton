@@ -43,6 +43,18 @@ services:
     depends_on:
       - nginx
     command: certonly --non-interactive --webroot --webroot-path=/var/www/html --email csaicalpoly@gmail.com --agree-tos --no-eff-email -d swantonpoppy.org -d www.swantonpoppy.org
+  flask:
+    image: python:3.7.9-slim-buster
+    restart: unless-stopped
+    container_name: logging_api
+    # depends_on: nginx
+    networks:
+      - app-network
+    ports:
+      - "8264:8264"
+    volumes:
+      - logging-reqs:/app/
+    command: bash -c "cd /app/ && pip3 install -r logging-requirements.txt && gunicorn log_queries:app --config gunicorn_config.py"
 
 volumes:
   certbot-etc:
@@ -52,6 +64,12 @@ volumes:
     driver_opts:
       type: none
       device: /var/www/html
+      o: bind
+  logging-reqs:
+    driver: local
+    driver_opts:
+      type: none
+      device: ../
       o: bind
 networks:
   app-network:

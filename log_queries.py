@@ -1,20 +1,27 @@
 import datetime
 
 import pickle
-import os.path
 
+from flask import Flask, request
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
+from os import path, environ
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']  # Allows read and write access
 
 # The ID, range, and auth path for appending to the spreadsheet.
-SPREADSHEET_ID = ''
+SPREADSHEET_ID = environ.get("SPREADSHEET_ID", get_spreadsheet_id())
 RANGE_NAME = 'A1'  # Should always place the new query correctly at the bottom of the table
 AUTH_PATH = 'credentials.json'
 
+BAD_REQUEST = 400
+SUCCESS = 200
+SERVER_ERROR = 500
+
+app = Flask(__name__)
 
 def config_api():
     """
@@ -28,7 +35,7 @@ def config_api():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
+    if path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
 
@@ -81,3 +88,28 @@ def log_query(service, question: str, answer: str, sentiment: str = "N/A", sprea
         return 1
 
     return 0
+
+@app.route("/log/query", methods=["POST"])
+def log_route():
+    request_body = request.get_json()
+    question = request_body.get("question")
+    answer = request_body.get("answer")
+    sentiment = request_body.get("sentiment")
+    request_body = request.get_json()
+    question = request_body.get("question")
+    answer = request_body.get("answer")
+    sentiment = request_body.get("sentiment")
+    if question is None or answer is None or sentiment is None:
+        return "Request was missing a required parameter", BAD_REQUEST
+    if(log_query(config_api(), question, answer, sentiment) == 0):
+        return "Success", SUCCESS
+    else:
+        return "Failed to log the query", SERVER_ERROR
+
+
+def get_spreadsheet_id():
+    with open("id.txt") as id_file:
+        return id_file.readline()
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
