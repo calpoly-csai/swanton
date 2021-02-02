@@ -95,10 +95,6 @@ def log_route():
     question = request_body.get("question")
     answer = request_body.get("answer")
     sentiment = request_body.get("sentiment")
-    request_body = request.get_json()
-    question = request_body.get("question")
-    answer = request_body.get("answer")
-    sentiment = request_body.get("sentiment")
     if question is None or answer is None or sentiment is None:
         return "Request was missing a required parameter", BAD_REQUEST
     if(log_query(config_api(), question, answer, sentiment) == 0):
