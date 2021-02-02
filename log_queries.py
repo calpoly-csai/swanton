@@ -12,6 +12,11 @@ from os import path, environ
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']  # Allows read and write access
 
+# Needs to be up here, since we call it on the next line.
+def get_spreadsheet_id():
+    with open("id.txt") as id_file:
+        return id_file.readline()
+
 # The ID, range, and auth path for appending to the spreadsheet.
 SPREADSHEET_ID = environ.get("SPREADSHEET_ID", get_spreadsheet_id())
 RANGE_NAME = 'A1'  # Should always place the new query correctly at the bottom of the table
@@ -89,7 +94,7 @@ def log_query(service, question: str, answer: str, sentiment: str = "N/A", sprea
 
     return 0
 
-@app.route("/log/query", methods=["POST"])
+@app.route("/query", methods=["POST"])
 def log_route():
     request_body = request.get_json()
     question = request_body.get("question")
@@ -102,10 +107,6 @@ def log_route():
     else:
         return "Failed to log the query", SERVER_ERROR
 
-
-def get_spreadsheet_id():
-    with open("id.txt") as id_file:
-        return id_file.readline()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")

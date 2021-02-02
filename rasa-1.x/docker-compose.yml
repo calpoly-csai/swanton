@@ -27,6 +27,7 @@ services:
       - certbot-var:/var/lib/letsencrypt
     depends_on:
       - rasa
+      - flask
     networks:
       - app-network
     ports:
