@@ -35,9 +35,9 @@ def main() -> None:
 
     gen_dict = create_generic(fields, intent_dat, utter_dat)
 
-    story_str, intents, utterances = generate_stories(story_dat, gen_dict) 
+    story_str, intents, utterances, buttons = generate_stories(story_dat, gen_dict) 
     nlu_str = generate_nlu(intents, gen_dict)
-    domain_str = generate_domain(intents, utterances)
+    domain_str = generate_domain(intents, utterances, buttons)
 
     store_file(story_str, "stories.md")
     store_file(nlu_str, "nlu.md")
@@ -61,12 +61,14 @@ def store_file(
 
 def generate_domain(
                         intents:dict,
-                        utterances:dict) -> str: 
+                        utterances:dict,
+                        buttons:dict) -> str: 
     '''
     Iterate through the intents & utter dicts and produce the domain.md string
 
     :param intents: dictionary of the intents.
-    :param intents: dictionary of the utterances.
+    :param utterances: dictionary of the utterances.
+    :param buttons: dictionary of the buttons.
 
     :returns domain_str: string of domain.yaml 
     '''
@@ -79,23 +81,30 @@ def generate_domain(
         
     domain_str += "\nactions:\n"
 
-    print(utterances)
-
     for utter in utterances.keys():
         domain_str += ("  - %s\n" % utter)
 
         template_str += ("  %s:\n" % utter)
 
-        for utter_sample in utterances[utter]:            
+        for utter_sample in utterances[utter]:      
             utter_norm = utter_sample.replace("\"", "\'")
             template_str += ("  - text: \"%s\"\n" % utter_sample)
+
+        if utter in buttons:
+            template_str += ("    buttons:\n")
+
+            for title in buttons[utter]:
+                title_norm = title.replace("\"", "\'")
+                payload_norm = re.sub(r'[^\w\s]','',title_norm).replace(" ", "_")
+                template_str += ("    - title: \"%s\"\n" % title_norm)
+                template_str += ("      payload: /%s\n" % payload_norm)
+
         template_str += "\n"
 
     domain_str += template_str
     domain_str += "session_config:\n"
     domain_str += "  session_expiration_time: 60\n"
     domain_str += "  carry_over_slots_to_new_session: true\n"
-    
     return domain_str
 
 def generate_nlu(
@@ -223,10 +232,12 @@ def generate_stories(
     :returns story_str: string of the story.md 
     :returns intents: dict of the intent and its examples
     :returns utterances: dict of the utterance and its raw string
+    :returns buttons: dict of utterance and its button
     '''
 
     intents = {}
     utterances = {}
+    buttons = {}
     story_str = ""
     path_name = ""
 
@@ -268,6 +279,12 @@ def generate_stories(
             else: 
                 utterances[curr_utter] = [story_dets[0]]
 
+        elif (story_type == "BUTTON"):
+            curr_utter += "_button"
+            story_str += ("  - %s\n" % curr_utter)
+            buttons[curr_utter] = [story_det for story_det in story_dets[1:] if story_det != '']
+            utterances[curr_utter] = [story_dets[0]]
+
         elif ((story_type == "GENERIC") or (story_type == "GENNAME")):
             print("Generic utterance... skipping...")
 
@@ -281,7 +298,7 @@ def generate_stories(
 
     # print(utterances)
 
-    return story_str, intents, utterances
+    return story_str, intents, utterances, buttons
 
 def read_csv(csv_path: str) -> list:
     '''
