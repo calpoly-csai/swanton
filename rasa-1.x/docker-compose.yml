@@ -1,12 +1,78 @@
-version: '3.3'
+version: '3'
 services:
   rasa:
-    image: rasa:1.10.16
+    image: "${SRC}/rasa:1.10.16"
+    container_name: rasa
     expose:
       - 5005
     ports:
       - 5005:5005
     volumes:
       - ./:/app
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     command:
       - run
+    restart: unless-stopped
+    networks:
+      - app-network
+  nginx:
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    container_name: nginx
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - rasa
+      - flask
+    networks:
+      - app-network
+    ports:
+      - "80:80"
+      - "443:443"
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - nginx
+    command: certonly --non-interactive --webroot --webroot-path=/var/www/html --email csaicalpoly@gmail.com --agree-tos --no-eff-email -d swantonpoppy.org -d www.swantonpoppy.org
+  flask:
+    image: python:3.7.9-slim-buster
+    restart: unless-stopped
+    container_name: logging_api
+    # depends_on: nginx
+    networks:
+      - app-network
+    ports:
+      - "8264:8264"
+    volumes:
+      - logging-reqs:/app/
+    command: bash -c "cd /app/ && pip3 install -r logging-requirements.txt && gunicorn log_queries:app --config gunicorn_config.py"
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /var/www/html
+      o: bind
+  logging-reqs:
+    driver: local
+    driver_opts:
+      type: none
+      device: ../
+      o: bind
+networks:
+  app-network:
+    driver: bridge
+
