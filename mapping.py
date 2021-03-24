@@ -47,7 +47,7 @@ def filter_stopwords(combinations):
     return filtered
 
 def generate_n_grams(list):
-    "Prioritizes larger substrings over smaller substrings"
+    """Prioritizes larger substrings over smaller substrings"""
     list.sort(key=len, reverse=True)
     concatenated = [" ".join(substring) for substring in list] #concatenated the words within the substrings cuz they were in lists before
     return concatenated
