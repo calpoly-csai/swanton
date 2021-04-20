@@ -3,23 +3,10 @@ import stream_deepspeech
 from timeit import default_timer as timer
 import json
 
-stopwords = ["did", "how", "get", "is", "to", "the", "what", "a", "about", "do"] #need to load stopwords into a hashtable or a list
-
-mapper = {
-    "swan ton pacific ranch": "Swanton Pacific Ranch",
-    "Swanton Pacific Ranch": "Swanton Pacific Ranch",
-    "Swanton Pacifico": "Swanton Pacific Ranch",
-    "Swanton" : "Swanton Pacific Ranch",
-    "Swanton Pacific": "Swanton Pacific Ranch"
-}
-
-with open("test_json.json", "w") as in_json:
-    json.dump(mapper, in_json)
-
 def get_match(substring):
     """Returns the best match of a given substring, otherwise, returns no match"""
-    keys = [key for key in mapper]
-    matches = [(mapper[x], fuzz.ratio(substring, x)) for x in keys if fuzz.ratio(substring, x) > 70]
+    matches = [(correctionJSON()[key], fuzz.ratio(substring, key)) for key in correctionJSON().keys()
+               if fuzz.ratio(substring, key) > 70]
     ordered = sorted(matches, key=lambda x: x[1], reverse=True) #orders by the best matches
     if len(ordered) > 0:
         return ordered[0][0] #get the best match
@@ -40,7 +27,7 @@ def filter_stopwords(combinations):
     for substring in combinations:
         append = True
         for word in substring:
-            if word in stopwords:
+            if word in listing_stopwords("stopwords.txt"):
                 append = False
         if append == True:
             filtered.append(substring)
@@ -72,20 +59,37 @@ def stt_mapper(result):
 
     return best
 
-""" might remove later
-    replaced = False
-    map = mapper
-    for key in map: #check if it matches what we have already
-        if key in result:
-            best = result.replace(key, map[key])
-            replaced = True
-    if replaced == True:
-        return best """
+def listing_stopwords(filename):
+    """Returns a list of all the stopwords in stopwords.txt"""
+    try:
+        h = open(filename)
+    except:
+        raise FileNotFoundError
+    h.close()
+    f = open(filename, 'r')
+    list = []
+    lines = f.readlines()
+    for line in range(len(lines)):  # each line has one word
+        list.append(lines[line].strip())
+    f.close()
+    """Improvement could be where we load the stopwords into a hash table"""
+    return list
+
+def correctionJSON():
+    """Returns the JSON object containing corrected names"""
+
+    """Reads from corrections.json"""
+    myjsonfile = open('corrections.json')
+    jsondata = myjsonfile.read()
+
+    """Parsing"""
+    object = json.loads(jsondata)
+    return object
 
 if __name__ == "__main__":
 
     starttime = timer()
-    result = stream_deepspeech.run_stt(5)
+    result = stream_deepspeech.run_stt(4)
     correct = stt_mapper(result)
     print("The time difference is :", timer() - starttime)
     print(correct)
