@@ -45,7 +45,6 @@ def stt_mapper(result):
 
     variations = filter_stopwords(get_substrings(result))
     n_grams = generate_n_grams(variations)
-    print(n_grams)
     changed = []
     for substring in n_grams:
         no_change = False
